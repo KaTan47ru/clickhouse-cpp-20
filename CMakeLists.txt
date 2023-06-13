@@ -2,7 +2,8 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.0.2)
 
 LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-INCLUDE (cpp17)
+set(CMAKE_CXX_STANDARD 20)
+#INCLUDE (cpp17)
 INCLUDE (subdirs)
 INCLUDE (openssl)
 
@@ -17,7 +18,7 @@ OPTION (DEBUG_DEPENDENCIES "Print debug info about dependencies duting build" ON
 
 PROJECT (CLICKHOUSE-CLIENT)
 
-    USE_CXX17 ()
+ #   USE_CXX17 ()
     USE_OPENSSL ()
 
     IF (NOT CMAKE_BUILD_TYPE)
@@ -66,7 +67,7 @@ PROJECT (CLICKHOUSE-CLIENT)
     IF (WITH_SYSTEM_ABSEIL)
         FIND_PACKAGE(absl REQUIRED)
     ELSE ()
-        INCLUDE_DIRECTORIES (contrib/absl)
+        INCLUDE_DIRECTORIES (contrib)
         SUBDIRS (contrib/absl)
     ENDIF ()
 

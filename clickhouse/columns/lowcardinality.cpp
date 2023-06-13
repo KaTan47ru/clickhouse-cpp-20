@@ -20,7 +20,7 @@ enum KeySerializationVersion {
 };
 
 enum IndexType {
-    UInt8 = 0,
+    UInt8 = 0u,
     UInt16,
     UInt32,
     UInt64,
@@ -332,7 +332,7 @@ void ColumnLowCardinality::SavePrefix(OutputStream* output) {
 }
 
 void ColumnLowCardinality::SaveBody(OutputStream* output) {
-    const uint64_t index_serialization_type = indexTypeFromIndexColumn(*index_column_) | IndexFlag::HasAdditionalKeysBit;
+    const uint64_t index_serialization_type = (unsigned int)indexTypeFromIndexColumn(*index_column_) | (unsigned int)IndexFlag::HasAdditionalKeysBit;
     WireFormat::WriteFixed(*output, index_serialization_type);
 
     const uint64_t number_of_keys = dictionary_column_->Size();
